@@ -15,7 +15,7 @@
 </script>
 
 <template>
-  <a-box
+ <!--  <a-box
     :scale="`${scale} ${scale} ${scale}`"
     :material="`color: ${color}`"
     clickable
@@ -24,5 +24,5 @@
     :event-set__click="`event: click; attribute: material.color; value: ${randomColor};`"
     :event-set__far="`event: reset-color; attribute: material.color; value: ${color};`"
     @click="randomColor = randomHsl()"
-  ></a-box>
+  ></a-box> -->
 </template>

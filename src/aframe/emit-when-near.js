@@ -1,4 +1,5 @@
-AFRAME.registerComponent('emit-when-near', {
+AFRAME.registerComponent('emit-when-near', { 
+  multiple: true,
   schema: {
     target: {type: 'selector', default: '[camera]'},
     distance: {type: 'number', default: 1},
@@ -18,6 +19,7 @@ AFRAME.registerComponent('emit-when-near', {
     this.el.object3D.getWorldPosition(this.myPos);
     this.data.target.object3D.getWorldPosition(this.targetPos);
     const distanceTo = this.myPos.distanceTo(this.targetPos);
+    /* console.log(distanceTo,this.el); */
     if (distanceTo <= this.data.distance) {
       if (this.emiting) return;
       this.emiting = true;

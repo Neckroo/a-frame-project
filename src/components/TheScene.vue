@@ -37,45 +37,82 @@
         Model author: https://sketchfab.com/mvrc.art (Maxim Mavrichev)
         Model license: CC BY 4.0 ( https://creativecommons.org/licenses/by/4.0/ )
       -->
-      <a-asset-item  id="room" src="assets/vr_gallery.glb"></a-asset-item>
+      <!-- <a-asset-item  id="room" src="assets/vr_gallery.glb"></a-asset-item> -->
+      <a-asset-item  id="room" src="assets/low_poly_nature2.glb"></a-asset-item>
+      <a-asset-item  id="cave" src="assets/the_queen_of_the_caverns.glb"></a-asset-item>
+      <a-asset-item  id="apartment" src="assets/apartment2.glb"></a-asset-item>
     </a-assets>
 
     <a-entity
       v-if="allAssetsLoaded"
       gltf-model="#room"
       rotation="0 90 0"
-      position="0 0 -5"
-      scale="1 1.1 1"
+      position="0 -122.3 -5"
+      scale="5.2 5.2 5.2"
     >
-      <a-entity
-        geometry="primitive: plane; height: 2; width: 2;"
-        position="2 2 3.9"
-        rotation="-180 0 0"
-        life-like-automaton="genPerSec: 25;"
-      ></a-entity>
 
-      <a-entity
-        geometry="primitive: plane; height: 2; width: 2;"
-        position="2 2 -3.9"
-        life-like-automaton="genPerSec: 25; maxGen: 10; birthRule: 6,7,8; survivalRule: 4,5,6,7,8;"
-      ></a-entity>
+    <a-assets-item>
+    <img id="sky" src="assets/sky3.png">
+  </a-assets-item>
+  <a-sky src="#sky"></a-sky>
+ 
 
-      <BoxColorChanging
-        id="box-left"
-        :scale="scale"
-        :color="colorBoxLeft"
-        position="7 0.5 -3"
-        @click="colorBoxRight = randomHsl()"
-      />
-
-      <BoxColorChanging
-        id="box-right"
-        :scale="scale"
-        :color="colorBoxRight"
-        position="7 0.5 3"
-        @click="colorBoxLeft = randomHsl()"
-      />
     </a-entity>
+
+    <a-entity
+      v-if="allAssetsLoaded"
+      gltf-model="#cave"
+      rotation="0 90 0"
+      position="0 999.8 -5"
+      scale="1 1 1"
+      >
+    </a-entity>
+    <a-entity
+      v-if="allAssetsLoaded"
+      gltf-model="#apartment"
+      rotation="0 90 0"
+      position="0 -600 0"
+      scale="1.3   1.3 1.3"
+      >
+    </a-entity>
+    
+
+    <a-box
+        id ="teleport-cave"
+        rotation="70 -0 0 "  
+        position="-72 1 -25 "
+        material="color: #542e23  ;side: double;"
+        clickable
+        emit-when-near="target: #camera-rig; distance : 2; event : teleport-cave;"
+      ></a-box>
+
+      <a-box
+        id ="teleport-cave-back"
+        position="-3 1001.5 -9"
+        material="color: #542e23  ;side: double;"
+        clickable
+        emit-when-near="target: #camera-rig; distance : 2; event : teleport-cave-back;"
+      ></a-box>
+
+      <a-box
+        id ="teleport-apartment"
+        rotation="0 0 0 "  
+        position="-29.2 1.3 9 "
+        material="color: #542e23  ;side: double;"
+        clickable
+        emit-when-near="target: #camera-rig; distance : 2; event : teleport-apartment;"
+      ></a-box>
+
+      <a-box
+        id ="teleport-apartment-back"
+        rotation="0 0 0 "  
+        position="8 -600 3.8"
+        material="color: #542e23  ;side: double;"
+        clickable
+        emit-when-near="target: #camera-rig; distance : 1.1; event : teleport-apartment-back;"
+      ></a-box>
+
+      
 
     <TheNavMesh />
 

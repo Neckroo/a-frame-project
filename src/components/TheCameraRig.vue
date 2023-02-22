@@ -3,23 +3,38 @@
   import '../aframe/hide-in-vr';
   import '../aframe/simple-navmesh-constraint';
   import '../aframe/blink-controls';
+  import { ref } from 'vue';
+  import'../components/TheScene.vue';
+  import'../aframe/listen-to';
+  import'../aframe/emit-when-near';
+
+  const position = ref('-27 0 0');
+
 </script>
 
 <template>
   <a-entity
     id="camera-rig"
-    movement-controls="camera: #head;"
+
+    @teleport-cave="$event=>position = '30 1000 -3.5'"
+    @teleport-cave-back="$event=>position = '-27 0 0'"
+    @teleport-apartment="$event=>position = '0 -600 6'"
+    @teleport-apartment-back="$event=>position = '-27 0 0'"
+
+    movement-controls="camera: #head; speed:1;"
     disable-in-vr="component: movement-controls;"
+    :position="position"
   >
 
       <a-entity
         id="head"
         look-controls="pointerLockEnabled: true"
-        simple-navmesh-constraint="navmesh: [data-role='nav-mesh']; height: 1.65;"
-        disable-in-vr="component: simple-navmesh-constraint;"
+        asimple-navmesh-constraint="navmesh: [data-role='nav-mesh']; height: 1.65;"
+        adisable-in-vr="component: simple-navmesh-constraint;"
         camera
         position="0 1.65 0"
       >
+      
         <a-entity
           geometry="primitive: circle; radius: 0.0003;"
           material="shader: flat; color: white;"
