@@ -51,10 +51,10 @@
       scale="5.2 5.2 5.2"
     >
 
-    <a-assets-item>
-    <img id="sky" src="assets/sky3.png">
+<!--     <a-assets-item>
+    <img id="sky" src="assets/sky.jpg">
   </a-assets-item>
-  <a-sky src="#sky"></a-sky>
+  <a-sky src="#sky"></a-sky> -->
  
 
     </a-entity>
