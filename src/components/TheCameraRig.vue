@@ -21,6 +21,7 @@
     @teleport-apartment="$event=>position = '0 -600 6'"
     @teleport-apartment-back="$event=>position = '-27 0 0'"
 
+
     movement-controls="camera: #head; speed:1;"
     disable-in-vr="component: movement-controls;"
     :position="position"
