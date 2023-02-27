@@ -38,8 +38,8 @@
       <a-asset-item id="diamond" src="assets/pure_diamond.glb"></a-asset-item>
       <a-asset-item  id="navmesh-apartment" src="assets/navmesh-apartment.glb"></a-asset-item>
       <a-asset-item  id="navmesh-cave" src="assets/navmesh-cave.glb"></a-asset-item>
-      <a-assets-item><img id="sky" src="assets/sky.jpg"></a-assets-item>
-    </a-assets>
+<!--       <a-assets-item><img id="sky" src="assets/sky.jpg"></a-assets-item>
+ -->    </a-assets>
 
 
 <template v-if="allAssetsLoaded">
