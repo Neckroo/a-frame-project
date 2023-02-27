@@ -8,32 +8,29 @@
   import'../aframe/listen-to';
   import'../aframe/emit-when-near';
 
-  const position = ref('-27 0 0');
+ 
 
 </script>
+
+
+/* @teleport-cave-back="$event=>position = '-27 0 0'"
+    @teleport-apartment="$event=>position = '0 -600 6'"
+    @teleport-apartment-back="$event=>position = '-27 0 0'" */
 
 <template>
   <a-entity
     id="camera-rig"
-
-    @teleport-cave="$event=>position = '30 1000 -3.5'"
-    @teleport-cave-back="$event=>position = '-27 0 0'"
-    @teleport-apartment="$event=>position = '0 -600 6'"
-    @teleport-apartment-back="$event=>position = '-27 0 0'"
-
-
     movement-controls="camera: #head; speed:1;"
     disable-in-vr="component: movement-controls;"
-    :position="position"
+    position="-27 0 0"
   >
 
       <a-entity
         id="head"
         look-controls="pointerLockEnabled: true"
-        asimple-navmesh-constraint="navmesh: [data-role='nav-mesh']; height: 1.65;"
-        adisable-in-vr="component: simple-navmesh-constraint;"
+        simple-navmesh-constraint="navmesh: [data-role='nav-mesh']; height: 1.80;fall: 0.5;"
         camera
-        position="0 1.65 0"
+        position="0 1.80 0"
       >
       
         <a-entity
