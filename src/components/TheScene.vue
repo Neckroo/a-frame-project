@@ -44,20 +44,15 @@
 
 <template v-if="allAssetsLoaded">
  
-  <a-entity hand-controls="left"
-  grab-and-move
-  ></a-entity>
-
-  
-  <a-entity hand-controls="right"
-  grab-and-move></a-entity>
+  <a-entity sphere-collider="objects: a-box" super-hands hand-controls="hand: left"></a-entity>
+      <a-entity sphere-collider="objects: a-box" super-hands hand-controls="hand: right"></a-entity>
 
   <a-entity id="box" 
-  class="grabbable" 
+  
   gltf-model="#diamond" 
   position="-30 1 0"
   scale="0.5 0.5 0.5"
-  grabbable
+  grabbable  draggable droppable
   ></a-entity>
 
 
