@@ -50,7 +50,7 @@
   <a-entity id="box" 
   
   gltf-model="#diamond" 
-  position="-28 1 0"
+  position="-28.6 1 0"
   scale="0.1 0.1 0.1"
   grabbable  draggable droppable
   ></a-entity>
