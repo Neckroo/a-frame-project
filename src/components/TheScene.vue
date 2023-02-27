@@ -55,7 +55,8 @@
   <a-entity id="box" 
   class="grabbable" 
   gltf-model="#diamond" 
-  position="-27 1 0"
+  position="-30 1 0"
+  scale="0.5 0.5 0.5"
   grabbable
   ></a-entity>
 
