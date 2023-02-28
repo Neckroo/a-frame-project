@@ -170,7 +170,7 @@ function chestClicked($event) {
         scale="5.2 5.2 5.2"
       >
       </a-entity>
-      <a-sky src="#sky"></a-sky>
+      <!-- <a-sky src="#sky"></a-sky> -->
 
       <a-entity
         gltf-model="#cave"
