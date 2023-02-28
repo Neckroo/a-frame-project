@@ -6,6 +6,7 @@
   import '../aframe/life-like-automaton';
   import '../aframe/grabbable';
   import '../aframe/clickable';
+  import TheNavMesh from './TheNavMesh.vue';
 
   defineProps({
     scale: Number,
@@ -47,11 +48,11 @@
       <a-asset-item  id="room" src="assets/low_poly_nature2.glb"></a-asset-item>
       <a-asset-item  id="cave" src="assets/the_queen_of_the_caverns.glb"></a-asset-item>
       <a-asset-item  id="apartment" src="assets/apartment3.glb"></a-asset-item>
-      <a-asset-item  id="navmesh" src="assets/navmesh.glb"></a-asset-item>
+     <!--  <a-asset-item  id="navmesh" src="assets/navmesh.glb"></a-asset-item> -->
       <a-asset-item id="diamond" src="assets/pure_diamond.glb"></a-asset-item>
       <a-asset-item id="chest" src="assets/treasure_chest.glb"></a-asset-item>
-      <a-asset-item  id="navmesh-apartment" src="assets/navmesh-apartment.glb"></a-asset-item>
-      <a-asset-item  id="navmesh-cave" src="assets/navmesh-cave.glb"></a-asset-item>
+    <!--   <a-asset-item  id="navmesh-apartment" src="assets/navmesh-apartment.glb"></a-asset-item>
+      <a-asset-item  id="navmesh-cave" src="assets/navmesh-cave.glb"></a-asset-item> -->
       <a-asset-item  id="gold-bar" src="assets/gold_bar_low_poly.glb"></a-asset-item>
 <!--       <a-assets-item><img id="sky" src="assets/sky.jpg"></a-assets-item>
  -->    </a-assets>
@@ -90,7 +91,7 @@
   
   ></a-entity>
 
-    <a-entity
+ <!--    <a-entity
     id="nav-mesh"
       data-role="nav-mesh"
       gltf-model="#navmesh" 
@@ -119,7 +120,7 @@
       position="0 -9999 -5"
       scale="0.9 0.9 0.9  "
       nav-mesh visible="false"
-    ></a-entity>
+    ></a-entity> -->
     <a-entity
      
       gltf-model="#room"
@@ -184,9 +185,11 @@
       :y="0.2"
     />
 
+    <TheNavMesh />
+
      
 </template>
-
+    
     <TheCameraRig />
 
   </a-scene>

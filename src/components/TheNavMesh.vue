@@ -1,18 +1,37 @@
+
 <template>
-  <a-entity
-    geometry="primitive: plane; height: 13.5; width: 6"
-    position="0 0.01 -4.75"
-    rotation="-90 0 0"
-    data-role="nav-mesh"
-    material="color: blue"
-    visible="false"
-  ></a-entity>
-  <a-entity
-    geometry="primitive: plane; height: .5; width: 5"
-    position="0 0.01 -11.75"
-    rotation="-90 0 0"
-    data-role="nav-mesh"
-    material="color: red"
-    visible="false"
-  ></a-entity>
+
+ <a-entity
+    id="nav-mesh"
+      data-role="nav-mesh"
+      gltf-model="url(assets/navmesh.glb)" 
+      rotation="0 90 0"
+      position="-68.16 -123 -5"
+      scale="5.2 5.2 5.2"
+      nav-mesh visible="false"
+    ></a-entity>
+    
+
+    <a-entity
+    id="nav-mesh-apartment"
+      data-role="nav-mesh"
+      gltf-model="url(assets/navmesh-apartment.glb)" 
+      rotation="0 90 0"
+      position="0 -600 0"
+      scale="1 1 1"
+      nav-mesh visible="false"
+    ></a-entity>
+
+
+    <a-entity
+    id="nav-mesh-cave"
+      data-role="nav-mesh"
+      gltf-model="url(assets/navmesh-cave.glb)" 
+      rotation="0 90 0"
+      position="0 -9999 -5"
+      scale="0.9 0.9 0.9"
+      nav-mesh visible="false"
+    ></a-entity>
+
+
 </template>
