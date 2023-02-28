@@ -3,7 +3,7 @@
   import '../aframe/hide-in-vr';
   import '../aframe/simple-navmesh-constraint';
   import '../aframe/blink-controls';
-  import { ref } from 'vue';
+  import { ref, watch } from 'vue';
   import'../components/TheScene.vue';
   import'../aframe/listen-to';
   import'../aframe/emit-when-near';
