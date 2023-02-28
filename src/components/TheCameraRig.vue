@@ -63,6 +63,7 @@
           teleportOrigin: #head;
           collisionEntities: [data-role='nav-mesh'];
           snapTurn: false;
+          defaultPlaneSize: 999999999999;
         `"
       ></a-entity>
 
