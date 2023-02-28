@@ -102,14 +102,14 @@ function chestClicked($event) {
       <a-entity
         id="teleporter-cave"
         gltf-model="#teleporter"
-        position="0 -9999 -8"
+        position="0 -9998.9 -8"
         scale="0.1 0.1 0.1"
       ></a-entity>
 
       <a-entity
         id="teleporter-cave-back"
         gltf-model="#teleporter"
-        position="-29.2 0.4 9"
+        position="-72 0.6 -25"
         scale="0.1 0.1 0.1"
       ></a-entity>
 

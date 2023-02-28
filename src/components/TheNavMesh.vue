@@ -6,7 +6,7 @@
       data-role="nav-mesh"
       gltf-model="url(assets/navmesh.glb)" 
       rotation="0 90 0"
-      position="-68.16 -123 -5"
+      position="-68.16 -122.5 -5"
       scale="5.2 5.2 5.2"
       nav-mesh visible="false"
     ></a-entity>
