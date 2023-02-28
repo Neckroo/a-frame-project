@@ -12,6 +12,21 @@
     loaded: Boolean,
   }); 
 
+  watch(loaded, (value) => {
+    if (!value) return;
+    setTimeout(() => {
+      document
+        .querySelector("#hand-left")
+        .setAttribute("blink-controls", ` 
+            landingMaxAngle: 90;
+            cameraRig: #camera-rig;
+            teleportOrigin: #head;
+            collisionEntities: [data-role='nav-mesh'];
+            snapTurn: false;
+          `);
+    }, 1000);
+  });
+
 </script>
 
 
@@ -49,13 +64,6 @@
       <a-entity
         id="hand-left"
         hand-controls="hand: left"
-        :blink-controls="!loaded ? null : ` 
-          landingMaxAngle: 90;
-          cameraRig: #camera-rig;
-          teleportOrigin: #head;
-          collisionEntities: [data-role='nav-mesh'];
-          snapTurn: false;
-        `"
       ></a-entity>
 
       <a-entity
