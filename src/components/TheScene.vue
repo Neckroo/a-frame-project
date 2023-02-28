@@ -61,7 +61,7 @@ function chestClicked($event) {
       <a-asset-item
         id="teleporter"
         src="assets/sm_teleporter.glb"
-        
+
       ></a-asset-item>
     </a-assets>
 
@@ -90,6 +90,7 @@ function chestClicked($event) {
         position="-29.2 0.4 9"
         scale="0.1 0.1 0.1"
       ></a-entity>
+
 
       <a-entity
         id="teleporter-appart-back"
