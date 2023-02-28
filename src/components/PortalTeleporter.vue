@@ -8,7 +8,7 @@
     label: {type: String, default: ''},
     rot: {type: [Number, Boolean], default: false},
   });
-  console.log(p);
+
 </script>
 
 <template>

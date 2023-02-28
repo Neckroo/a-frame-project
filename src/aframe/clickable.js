@@ -1,4 +1,4 @@
-AFRAME.registerComponent('aclickable', {
+AFRAME.registerComponent('clickable', {
   schema: {
     color: {type: 'color', default: 'black'}
   },

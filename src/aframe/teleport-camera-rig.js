@@ -17,7 +17,6 @@ AFRAME.registerComponent('teleport-camera-rig', {
     init: function () {
       this.onEvent = this.onEvent.bind(this);
       this.el.addEventListener(this.data.on, this.onEvent);
-      console.log(this.data);
     },
   
     onEvent: function () {

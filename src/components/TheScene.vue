@@ -2,11 +2,10 @@
   import { ref } from 'vue';
   import { randomHsl } from '../utils/color.js';
   import PortalTeleporter from './PortalTeleporter.vue';
-  import BoxColorChanging from './BoxColorChanging.vue';
   import TheCameraRig from './TheCameraRig.vue';
-  import TheNavMesh from './TheNavMesh.vue';
-
   import '../aframe/life-like-automaton';
+  import '../aframe/grabbable';
+  import '../aframe/clickable';
 
   defineProps({
     scale: Number,
@@ -15,6 +14,13 @@
   const colorBoxLeft = ref(randomHsl());
   const colorBoxRight = ref(randomHsl());
   const allAssetsLoaded = ref(false);
+
+  function chestClicked($event){
+  console.log("chest clicked")
+  document.querySelector('#gold').setAttribute('grabbable',"target: #hand-right");
+  document.querySelector('#gold').emit('click')
+}
+  
 </script>
 
 <template>
@@ -36,26 +42,46 @@
       <a-asset-item  id="apartment" src="assets/apartment3.glb"></a-asset-item>
       <a-asset-item  id="navmesh" src="assets/navmesh.glb"></a-asset-item>
       <a-asset-item id="diamond" src="assets/pure_diamond.glb"></a-asset-item>
+      <a-asset-item id="chest" src="assets/treasure_chest.glb"></a-asset-item>
       <a-asset-item  id="navmesh-apartment" src="assets/navmesh-apartment.glb"></a-asset-item>
       <a-asset-item  id="navmesh-cave" src="assets/navmesh-cave.glb"></a-asset-item>
+      <a-asset-item  id="gold-bar" src="assets/gold_bar_low_poly.glb"></a-asset-item>
 <!--       <a-assets-item><img id="sky" src="assets/sky.jpg"></a-assets-item>
  -->    </a-assets>
 
 
+ 
+
+
 <template v-if="allAssetsLoaded">
  
-  <a-entity sphere-collider="objects: a-box" super-hands hand-controls="hand: left"></a-entity>
-      <a-entity sphere-collider="objects: a-box" super-hands hand-controls="hand: right"></a-entity>
 
-  <a-entity id="box" 
-  
+
+  <a-entity id="diamond" 
   gltf-model="#diamond" 
   position="-26.6 1 0"
   scale="0.1 0.1 0.1"
-  grabbable  draggable droppable
+  grabbable="target: #hand-right"
+  clickable
+  @triggerdown="grabbable='target: #hand-right'"
+  @triggerup="grabbable='target: null'"
   ></a-entity>
 
+  <a-entity id="chest" 
+  gltf-model="#chest" 
+  position="-27 0.5 -30"
+  scale="2 2 2"
+  clickable
+  @click=chestClicked($event)>
+  ></a-entity>
 
+  <a-entity id="gold" 
+  gltf-model="#gold-bar" 
+  position="-26.6 2 0"
+  scale="0.2 0.2 0.2"
+  clickable
+  
+  ></a-entity>
 
     <a-entity
     id="nav-mesh"
