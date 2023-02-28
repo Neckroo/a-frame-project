@@ -1,5 +1,5 @@
 <script setup>
-  import { ref } from 'vue';
+  import { ref, watch} from 'vue';
   import { randomHsl } from '../utils/color.js';
   import PortalTeleporter from './PortalTeleporter.vue';
   import TheCameraRig from './TheCameraRig.vue';
@@ -14,6 +14,13 @@
   const colorBoxLeft = ref(randomHsl());
   const colorBoxRight = ref(randomHsl());
   const allAssetsLoaded = ref(false);
+
+  watch(allAssetsLoaded, (value) => {
+    if (value) return;
+    document.querySelector('#hand-left').components['blink-controls'].queryCollisionEntities();
+  });
+
+
 
   function chestClicked($event){
   console.log("chest clicked")
