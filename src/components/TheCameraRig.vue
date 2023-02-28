@@ -19,6 +19,7 @@
       loaded2.value = true;
     }, 1000);
   });
+  
 
 </script>
 
@@ -41,6 +42,9 @@
         simple-navmesh-constraint="navmesh: [data-role='nav-mesh']; height: 1.80;fall: 0.5;"
         camera
         position="0 1.80 0"
+        pathfinding="startEvents: move; speed: 0.8;"
+        nav-mesh="type: triangle; id: navMesh;"
+          
       >
       
         <a-entity
@@ -57,7 +61,7 @@
       <a-entity
         id="hand-left"
         hand-controls="hand: left"
-        :blink-controls="!loaded2 ? null : ` 
+        :blink-controls ="!loaded2 ? null : ` 
           landingMaxAngle: 90;
           cameraRig: #camera-rig;
           teleportOrigin: #head;
@@ -65,6 +69,7 @@
           snapTurn: false;
           defaultPlaneSize: 1000;
         `"
+        pathfinding
       ></a-entity>
 
       <a-entity
