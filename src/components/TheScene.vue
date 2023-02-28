@@ -185,11 +185,12 @@
       :y="0.2"
     />
 
+    
     <TheNavMesh />
-
+    
      
 </template>
-    
+
     <TheCameraRig />
 
   </a-scene>
