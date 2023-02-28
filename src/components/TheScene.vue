@@ -78,7 +78,7 @@
   <a-entity id="gold" 
   gltf-model="#gold-bar" 
   position="-26.6 2 0"
-  scale="0.2 0.2 0.2"
+  scale="0.1 0.1 0.1"
   clickable
   
   ></a-entity>
