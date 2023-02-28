@@ -11,20 +11,12 @@
   const props = defineProps({
     loaded: Boolean,
   }); 
-const la = ref(props.loaded)
 
-  watch(la, (value) => {
+  const loaded2 = ref(false);
+  watch(() => props.loaded, (value) => {
     if (!value) return;
     setTimeout(() => {
-      document
-        .querySelector("#hand-left")
-        .setAttribute("blink-controls", ` 
-            landingMaxAngle: 90;
-            cameraRig: #camera-rig;
-            teleportOrigin: #head;
-            collisionEntities: [data-role='nav-mesh'];
-            snapTurn: false;
-          `);
+      loaded2.value = true;
     }, 1000);
   });
 
@@ -65,6 +57,13 @@ const la = ref(props.loaded)
       <a-entity
         id="hand-left"
         hand-controls="hand: left"
+        :blink-controls="!loaded2 ? null : ` 
+          landingMaxAngle: 90;
+          cameraRig: #camera-rig;
+          teleportOrigin: #head;
+          collisionEntities: [data-role='nav-mesh'];
+          snapTurn: false;
+        `"
       ></a-entity>
 
       <a-entity
