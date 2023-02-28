@@ -8,11 +8,12 @@
   import'../aframe/listen-to';
   import'../aframe/emit-when-near';
 
-  defineProps({
+  const props = defineProps({
     loaded: Boolean,
   }); 
+const la = ref(props.loaded)
 
-  watch(loaded, (value) => {
+  watch(la, (value) => {
     if (!value) return;
     setTimeout(() => {
       document
