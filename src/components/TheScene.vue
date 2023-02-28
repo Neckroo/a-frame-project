@@ -16,7 +16,7 @@
   const allAssetsLoaded = ref(false);
 
   watch(allAssetsLoaded, (value) => {
-    if (value) return;
+    if (!value) return;
     document.querySelector('#hand-left').components['blink-controls'].queryCollisionEntities();
   });
 
