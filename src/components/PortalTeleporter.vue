@@ -23,6 +23,7 @@
       rot: ${rot === false ? 'false' : rot};
     `"
     emit-when-near="target: #head; distance : 2; event : teleport;"
-  >
+    visible="false"
+    >
   </a-box>
 </template>

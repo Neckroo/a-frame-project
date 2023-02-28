@@ -8,7 +8,9 @@
   import'../aframe/listen-to';
   import'../aframe/emit-when-near';
 
- 
+  defineProps({
+    loaded: Boolean,
+  }); 
 
 </script>
 
@@ -47,13 +49,13 @@
       <a-entity
         id="hand-left"
         hand-controls="hand: left"
-        blink-controls="
+        :blink-controls="!loaded ? null : ` 
           landingMaxAngle: 90;
           cameraRig: #camera-rig;
           teleportOrigin: #head;
           collisionEntities: [data-role='nav-mesh'];
           snapTurn: false;
-        "
+        `"
       ></a-entity>
 
       <a-entity
