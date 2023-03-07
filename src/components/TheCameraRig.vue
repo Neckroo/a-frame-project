@@ -39,9 +39,9 @@
       <a-entity
         id="head"
         look-controls="pointerLockEnabled: true"
-        simple-navmesh-constraint="navmesh: [data-role='nav-mesh']; height: 1.80;fall: 0.5;"
+        simple-navmesh-constraint="navmesh: [data-role='nav-mesh']; height: 1.65; fall: 0.8;"
         camera
-        position="0 1.80 0"
+        position="0 1.65 0"
         pathfinding="startEvents: move; speed: 0.8;"
         nav-mesh="type: triangle; id: navMesh;"
           
@@ -76,7 +76,7 @@
         id="hand-right"
         hand-controls="hand: right"
         laser-controls="hand: right"
-        position="0.2 1 0.1"
+        position="0.2 1.1 0.1"
         raycaster="far: 2; objects: [clickable]; showLine: true;"
       ></a-entity>
 

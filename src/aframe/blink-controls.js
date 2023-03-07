@@ -388,7 +388,7 @@ AFRAME.registerComponent('blink-controls', {
    * and `child-detached` events.
    */
   queryCollisionEntities: function () {
-    console.log("test");
+    /* console.log("test"); */
     const data = this.data
     const el = this.el
 

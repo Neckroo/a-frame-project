@@ -1,6 +1,7 @@
 AFRAME.registerComponent('grabbable', {
     schema: {
       target: {type: 'selector', default: '#hand-right'},
+      auto: {type: 'boolean', default: false}
     },
     init: function () {
       this.initialPos = {...this.el.object3D.position};
@@ -9,7 +10,14 @@ AFRAME.registerComponent('grabbable', {
       this.pos = new THREE.Vector3();
       this.rot = new THREE.Quaternion();
       this.target = null;
-      this.el.addEventListener('click', evt => this.grab(evt));
+      if (this.data.auto) {
+        this.grab();
+      }
+      else {
+        this.el.addEventListener('click', evt => this.grab(evt));
+
+      }
+       
     },
     grab: function (evt) {
       this.target = this.data.target;
