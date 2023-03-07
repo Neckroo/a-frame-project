@@ -89,7 +89,7 @@ console.log(place.value);
       <!--   <a-asset-item  id="navmesh-apartment" src="assets/navmesh-apartment.glb"></a-asset-item>
       <a-asset-item  id="navmesh-cave" src="assets/navmesh-cave.glb"></a-asset-item> -->
       <a-asset-item id="gold-bar" src="assets/gold_bar_low_poly.glb"></a-asset-item>
-      <a-assets-item><img id="sky" src="assets/sky3.png"></a-assets-item>
+      <!-- <a-assets-item><img id="sky" src="assets/sky3.png"></a-assets-item> -->
       <a-asset-item id="teleporter" src="assets/sm_teleporter.glb"></a-asset-item>
       <a-asset-item id="arrow-3d" src="assets/arrow.glb"></a-asset-item>
 
