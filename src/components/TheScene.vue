@@ -5,9 +5,12 @@ import PortalTeleporter from "./PortalTeleporter.vue";
 import TheCameraRig from "./TheCameraRig.vue";
 import "../aframe/life-like-automaton";
 import "../aframe/grabbable";
+import "../aframe/a-ocean";
 import "../aframe/clickable";
 import TheNavMesh from "./TheNavMesh.vue";
 import { place, showOnboarding, diamondGrabbed,goldGrabbed } from "../aframe/store.js";
+import "../aframe/animation-mixer";
+
 
 defineProps({
   scale: Number,
@@ -33,7 +36,8 @@ function clickOnDropZone ($event){
 
   if (diamondGrabbed.value) {
     target2.removeAttribute("grabbable");
-    target2.setAttribute("position", "4.2 -598.87 0.7");
+    target2.setAttribute("position", "4.2 -598.8 0.7");
+    target2.setAttribute("scale", "0.08 0.08 0.08");
   }
   if (goldGrabbed.value) {
     target1.removeAttribute("grabbable");
@@ -48,6 +52,11 @@ function chestClicked($event) {
     .setAttribute("grabbable", "target: #hand-right");
   document.querySelector("#gold").emit("click");
   goldGrabbed.value=true;
+
+  document
+    .querySelector("#spot-chest")
+    .setAttribute("light", "intensity:0");
+
 }
 
 function diamondClicked($event) {
@@ -55,18 +64,33 @@ function diamondClicked($event) {
     .querySelector("#diamond")
     .setAttribute("grabbable", "target: #hand-right; auto: true");
   diamondGrabbed.value=true;
+
+  document
+    .querySelector("#spot-diamond")
+    .setAttribute("light", "intensity:0");
+}
+
+function waterTriggered($event) {
+  console.log("water triggered");
+  document.querySelector("#spot-lake").setAttribute("light", "intensity:0");
 }
 
 function tpToMyPlace(newPlace) {
- console.log("place accessed"); 
   place.value = newPlace;
-  console.log(place.value);
+  console.log("place accessed : "+place.value); 
 }
 
 const place1 = "cave";
 const place2 = "nature";
 
 console.log(place.value);
+
+/* watch (allAssetsLoaded, (value) => {
+  if (!value) return;
+  document.querySelector("#hand-left").components["blink-controls"].queryCollisionEntities();
+
+});
+ */
 
 </script>
 
@@ -84,15 +108,18 @@ console.log(place.value);
       <a-asset-item id="cave" src="assets/the_queen_of_the_caverns.glb"></a-asset-item>
       <a-asset-item id="apartment" src="assets/apartment3.glb"></a-asset-item>
       <!--  <a-asset-item  id="navmesh" src="assets/navmesh.glb"></a-asset-item> -->
-      <a-asset-item id="diamond-3d" src="assets/pure_diamond.glb"></a-asset-item>
-      <a-asset-item id="chest" src="assets/treasure_chest.glb"></a-asset-item>
+      <a-asset-item id="diamond-3d" src="assets/pure-diamond.glb"></a-asset-item>
+      <a-asset-item id="chest-3d" src="assets/treasure_chest.glb"></a-asset-item>
       <!--   <a-asset-item  id="navmesh-apartment" src="assets/navmesh-apartment.glb"></a-asset-item>
       <a-asset-item  id="navmesh-cave" src="assets/navmesh-cave.glb"></a-asset-item> -->
       <a-asset-item id="gold-bar" src="assets/gold_bar_low_poly.glb"></a-asset-item>
-      <!-- <a-assets-item><img id="sky" src="assets/sky3.png"></a-assets-item> -->
+      <a-assets-item><img id="sky" src="assets/sky3.png"></a-assets-item>
       <a-asset-item id="teleporter" src="assets/sm_teleporter.glb"></a-asset-item>
       <a-asset-item id="arrow-3d" src="assets/arrow.glb"></a-asset-item>
-
+      <a-asset-item id="nav-mesh-room" src="assets/navmesh.glb"></a-asset-item>
+      <a-asset-item id="nav-mesh-cave" src="assets/navmesh-cave.glb"></a-asset-item>
+      <a-asset-item id="nav-mesh-apartment" src="assets/navmesh-apartment.glb"></a-asset-item>
+      <a-asset-item id="water" src="assets/water_waves.glb"></a-asset-item>
 
 
       <a-asset-item id="sound-forest" response-type="arraybuffer" src="assets/forest.mp3" preload="auto"></a-asset-item>
@@ -101,41 +128,92 @@ console.log(place.value);
       <a-asset-item id="sound-spider" response-type="arraybuffer" src="assets/spider.mp3" preload="auto"></a-asset-item>
       <a-asset-item id="sound-town" response-type="arraybuffer" src="assets/town.mp3" preload="auto"></a-asset-item>
 
-
     </a-assets>
 
     <template v-if="allAssetsLoaded">
 
-
-      <a-entity light="type: ambient; color: #BBB; intensity: 0.1"
-      position="0 0.4 9"></a-entity>
-
      
 
-      <a-entity v-if="place=='cave'" light="type: ambient; color: #eb4034; intensity: 0.2"
-      position="-1 -9999 -3"></a-entity>
+      <a-entity light="type: ambient; color: #BBB; intensity: 0.2" position="0 0.4 9"></a-entity>
+      <a-entity v-if="place=='cave'" light="type: ambient; color: #fc1100; intensity: 0.1" 
+      position="-1 -9999 -3"
+      animation="property: light.intensity; to: 0.1; loop: true; dur: 700; dir: alternate;"
+      ></a-entity>
 
 
 
-      <a-entity light="type: directional; color: #FFF; intensity: 0.2" position="-2000 0 5000"></a-entity>
-      <a-entity light="type: directional; color: #FFF; intensity: 0.2" position="-2000 0 -5000"></a-entity>
+      <a-entity v-if="place!=='cave'" light="type: directional; color: #FFF; intensity: 0.1" position="-2000 0 5000"
+      animation="property: light.intensity; to: 0.4; loop: true; dur: 8000; dir: alternate;"
+      animation__2="property: light.color; to: #57a8d4; loop: true; dur: 16000; dir: alternate;"
+      >
+      </a-entity>
+
+      <a-entity v-if="place!=='cave'" light="type: directional; color: #FFF; intensity: 0.1" position="-2000 0 -5000" 
+      animation="property: light.intensity; to: 0.4; loop: true; dur: 4000; dir: alternate;"
+      animation__2="property: light.color; to: #57a8d4; loop: true; dur: 8000; dir: alternate;"
+      >
+      </a-entity>
+
+
       <a-entity light="type: directional; color: #FFF; intensity: 0.2" position="-0 0 -5000"></a-entity>
 
-      <a-entity light="type: spot; angle: 90; color: #00e5ff; intensity: 4; decay: 200; distance :500;" position="4.5 -596 0.6"></a-entity>
+      <a-entity light="type: spot; angle: 90; color: #00e5ff; intensity: 4; decay: 200; distance :500;" position="4.5 -596 0.6">
+      </a-entity>
 
-      <a-entity light="type: point; intensity: 7; distance: 4; decay: 5"
-        position="-29.2 0.4 9"></a-entity>
-      <a-entity light="type: point; intensity: 7; distance: 4; decay: 5"
-        position="-72 0.6 -25"></a-entity>
-      <a-entity light="type: point; intensity: 4; distance: 1; decay: 4; color: #ffbc05;"
-      position="25.5 -9999.3 -6"></a-entity>
-      <a-entity light="type: point; intensity: 4; distance: 1; decay: 4; color: #ffbc05;"
-      position="12 -9998.6 -3.6"></a-entity>
-      <a-entity light="type: point; intensity: 4; distance: 6; decay: 2; color: #ffbc05;"
-      position="-1 -9999 -3"></a-entity>
+      <a-entity light="type: spot; angle: 180; color: #FFF; intensity: 30; decay: 1000; distance :500;" position="-1 -9997 -3"
+      animation="property: light.intensity; to: 20; loop: true; dur: 10000; dir: alternate;">
+      </a-entity>
+      
+      <a-entity id="spot-diamond" light="type: spot; angle: 60; color:#ffa18c; intensity:1; target:#diamond; decay:500;" 
+      position="-1 -9997.9 -3"
+      animation="property: position; to: -1 -9997.7 -3; loop: true; dur: 1000; dir: alternate;"
+      ></a-entity>
+
+
+      <a-entity id="spot-chest" light="type: spot; angle: 70; color:#ffa18c; intensity:10; target:#chest; decay:500;" 
+      position="-7 -9997.9 1"
+      animation="property: position; to: -7 -9997.7 1; loop: true; dur: 1000; dir: alternate;"
+      ></a-entity>
+
+      <a-entity id="spot-lake" light="type: spot; angle: 70; color:#288abf; intensity:10; target:#lake; decay:500;" 
+          position="-35 -1 -45"
+          animation="property: position; to: -35 0 -45.45; loop: true; dur: 3000; dir: alternate;"
+          ></a-entity>
+
+          <a-entity id="spot-lake2" light="type: spot; angle: 70; color:#288abf; intensity:10; target:#lake; decay:500;" 
+          position="-35 -1 -45"
+          animation__2="property: position; to: -35.5 -2 -45; loop: true; dur: 3000; dir: alternate;"
+          ></a-entity>
+
+          <a-entity id="spot-lake3" light="type: spot; angle: 180; color:#288abf; intensity:2; decay:5000;" 
+          position="-35 -1 -45"
+          animation="property: position; to: -35.5 -1 -45; loop: true; dur: 3000; dir: alternate;"
+          ></a-entity>
+   
       
 
 
+      <a-entity light="type: point; intensity: 7; distance: 4; decay: 5" position="-29.2 0.4 9"></a-entity>
+      <a-entity light="type: point; intensity: 7; distance: 4; decay: 5" position="-72 0.6 -25"></a-entity>
+
+
+      <a-entity id="lantern1" light="type: point; intensity: 4; distance: 1; decay: 4; color: #ffbc05;" position="25.5 -9999.3 -6"
+      animation="property: light.intensity; to: 11; loop: true; dur: 2000; dir: alternate;"
+      animation__2="property: light.color; to: #ffdd80; loop: true; dur: 1800; dir: alternate;">
+      </a-entity>
+
+      <a-entity id="lantern2" light="type: point; intensity: 4; distance: 1; decay: 4; color: #ffbc05;" 
+      position="12 -9998.6 -3.6" 
+      animation="property: light.intensity; to: 5; loop: true; dur: 900; dir: alternate;"
+      animation__2="property: light.color; to: #ffdd80; loop: true; dur: 800; dir: alternate;">
+      </a-entity>
+
+      <a-entity id="light-fond" light="type: point; intensity: 4; distance: 6; decay: 2; color: #ffbc05;" position="-1 -9999 -3"
+      animation="property: light.intensity; to: 6; loop: true; dur: 1800; dir: alternate;">
+      </a-entity>
+
+      <a-ocean id ="lake" color="#288abf" width="50" depth="35" density="10" speed="2" opacity="1" position="-35 -3.7 -45"></a-ocean>
+      <a-ocean color="#288abf" width="50" depth="35" density="10" speed="3" opacity="0.5" position="-35 -3.7 -45"></a-ocean>
 
       <a-box
         material="color: #542e23  ;side: double;"
@@ -147,9 +225,18 @@ console.log(place.value);
        </a-box>
 
 
+       <a-box
+    material="color: #542e23  ;side: double;"
+    clickable
+    @waterTriggered="$event=>waterTriggered()"
+    emit-when-near="target: #head; distance : 10; event : waterTriggered;"
+    visible="false"
+    >
+  </a-box>
+
       <a-entity
         position="-27 1.5 -3"
-        animation__position="property: position; from: -27 1.5 -3; to: -27 1.8 -3; dur: 4000; easing: linear; loop: true; dir: alternate; side: double;"
+        animation__position="property: position; from: -27 1.5 -3; to: -27 1.8 -3; dur: 4000; easing: linear; loop: true; dir: alternate;"
         material="color: #FFF; side: double;"
         >
         <a-text value="Trouve la caverne et recupere l'or et le diamant que l'araignee a vole !" color="#FFF" align="center"></a-text>
@@ -160,7 +247,7 @@ console.log(place.value);
         id="arrow"
         gltf-model="#arrow-3d"
         position="4.5 -598 0.6"
-        animation__position="property: position; from: 4.5 -598 0.6; to: 4.5 -597.8 0.6; dur: 1000; easing: linear; loop: true; dir: alternate; side: double;"
+        animation__position="property: position; from: 4.5 -598 0.6; to: 4.5 -597.8 0.6; dur: 1000; easing: linear; loop: true; dir: alternate; "
         scale="0.2 0.2 0.2"
         rotation="180 0 0"
       ></a-entity>
@@ -169,8 +256,8 @@ console.log(place.value);
       <a-entity
         id="diamond"
         gltf-model="#diamond-3d"
-        position="-26.6 1 0"
-        scale="0.1 0.1 0.1"
+        position="-1 -9998 -3"
+        scale="0.2 0.2 0.2"
         clickable
         @click="diamondClicked($event)"
       ></a-entity>
@@ -181,7 +268,6 @@ console.log(place.value);
         position="-29.2 0.4 9"
         scale="0.1 0.1 0.1"
       ></a-entity>
-
 
       <a-entity
         id="teleporter-appart-back"
@@ -212,21 +298,21 @@ console.log(place.value);
 
       <a-entity
         id="chest"
-        gltf-model="#chest"
-        position="-27 0.5 -30"
-        scale="2 2 2"
+        gltf-model="#chest-3d"
+        position="-7 -9998 1"
+        rotation="0 140 0"
+        scale="3 3 3"
         clickable
         sound="src:#sound-spider; autoplay: false ; maxDistance: 300; loop: true; volume: 3; on: click"
 
         @click="chestClicked($event)"
       >
-        ></a-entity
-      >
+      </a-entity>
 
       <a-entity
         id="gold"
         gltf-model="#gold-bar"
-        position="-26.6 2 0"
+        position="-26.6 -20 0"
         scale="0.1 0.1 0.1"
         clickable
       ></a-entity>
@@ -253,17 +339,16 @@ console.log(place.value);
         position="0 -9999.8 -5"
         scale="1 1 1"
         sound="src:#sound-cave; autoplay: true ; maxDistance: 300; loop: true; volume: 1;"
-      
-
       >
       </a-entity>
+
+
       <a-entity
         gltf-model="#apartment"
         rotation="0 90 0"
         position="0 -600 0"
         scale="1.2   1.2 1.2"
         sound="src:#sound-town; autoplay: true ; maxDistance: 300; loop: true; volume: 1;"
-
       >
       </a-entity>
 
@@ -300,12 +385,12 @@ console.log(place.value);
         :x="-27"
         :y="0.2"
       />
+      <TheNavMesh />
     </template>
  
 
-    <TheNavMesh />
-
     <TheCameraRig :loaded="allAssetsLoaded"/>
+    
 
   </a-scene>
 </template>

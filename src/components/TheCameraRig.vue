@@ -61,15 +61,13 @@
       <a-entity
         id="hand-left"
         hand-controls="hand: left"
-        :blink-controls ="!loaded2 ? null : ` 
+        blink-controls="  
           landingMaxAngle: 90;
           cameraRig: #camera-rig;
           teleportOrigin: #head;
           collisionEntities: [data-role='nav-mesh'];
           snapTurn: false;
-          defaultPlaneSize: 1000;
-        `"
-        pathfinding
+          defaultPlaneSize: 1000;"
       ></a-entity>
 
       <a-entity

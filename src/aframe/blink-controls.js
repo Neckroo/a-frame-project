@@ -106,6 +106,7 @@ AFRAME.registerComponent('blink-controls', {
     const data = this.data
     const el = this.el
     let i
+    this.updateCollisionEntities = this.updateCollisionEntities.bind(this)
 
     this.active = false
     this.obj = el.object3D
@@ -383,6 +384,15 @@ AFRAME.registerComponent('blink-controls', {
     }
   })(),
 
+  updateCollisionEntities: function(){
+    const collisionEntities = [...document.querySelectorAll('[data-role="nav-mesh"]')];
+    //this.collisionEntities = collisionEntities
+    //console.log(this.collisionEntities);
+    console.log(collisionEntities);
+    /* console.log(this.data.collisionEntities); */
+
+  },
+
   /**
    * Run `querySelectorAll` for `collisionEntities` and maintain it with `child-attached`
    * and `child-detached` events.
@@ -399,9 +409,11 @@ AFRAME.registerComponent('blink-controls', {
 
     const collisionEntities = [].slice.call(el.sceneEl.querySelectorAll(data.collisionEntities))
     this.collisionEntities = collisionEntities
+    console.log(this.collisionEntities);
 
     // Update entity list on attach.
     this.childAttachHandler = function childAttachHandler (evt) {
+      
       if (!evt.detail.el.matches(data.collisionEntities)) { return }
       collisionEntities.push(evt.detail.el)
     }
