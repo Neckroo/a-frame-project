@@ -71,19 +71,37 @@ function diamondClicked($event) {
 }
 
 function waterTriggered($event) {
-  console.log("water triggered");
-  document.querySelector("#spot-lake").setAttribute("light", "intensity:0");
-  document.querySelector("#spot-lake2").setAttribute("light", "intensity:0");
-  document.querySelector("#spot-lake3").setAttribute("light", "intensity:0");
+      // A-Frame component animation (example with the scale component)      
+      AFRAME.ANIME({
+        targets: 'body',
+        update: function(anim) {
+          console.log(anim.progress);
+          const intensity= (100-anim.progress)/10
+          document.querySelector("#spot-lake").setAttribute("light", `intensity:${intensity}`);
+          document.querySelector("#spot-lake2").setAttribute("light", `intensity:${intensity}`);
+          document.querySelector("#spot-lake3").setAttribute("light", `intensity:${intensity/2}`);
+
+        }
+      });
 }
 
 function waterTriggeredFar($event){
-  console.log("water triggered again");
-  document.querySelector("#spot-lake").setAttribute("light", "intensity:10");
-  document.querySelector("#spot-lake2").setAttribute("light", "intensity:10");
-  document.querySelector("#spot-lake3").setAttribute("light", "intensity:2");
+  // A-Frame component animation (example with the scale component)      
+  AFRAME.ANIME({
+        targets: 'body',
+        update: function(anim) {
+          const intensity= (anim.progress)/10
+          document.querySelector("#spot-lake").setAttribute("light", `intensity:${intensity}`);
+          document.querySelector("#spot-lake2").setAttribute("light", `intensity:${intensity}`);
+          document.querySelector("#spot-lake3").setAttribute("light", `intensity:${intensity/5}`);
+
+        }
+      });
 }
 
+function testListento(){
+  console.log("coucou");
+}
 
 
 function tpToMyPlace(newPlace) {
@@ -185,21 +203,24 @@ console.log(place.value);
       animation="property: position; to: -7 -9997.7 1; loop: true; dur: 1000; dir: alternate;"
       ></a-entity>
 
+
+
       <a-entity v-if="place!=='cave'" id="spot-lake" light="type: spot; angle: 70; color:#288abf; intensity:10; target:#lake; decay:500;" 
-          position="-35 -1 -45"
-          animation="property: position; to: -35 0 -45.45; loop: true; dur: 3000; dir: alternate;"
-          ></a-entity>
+        position="-35 -1 -45"
+        animation="property: position; to: -35 -2 -45.45; loop: true; dur: 3000; dir: alternate;"
+        >
+        </a-entity>
 
-          <a-entity v-if="place!=='cave'" id="spot-lake2" light="type: spot; angle: 70; color:#288abf; intensity:10; target:#lake; decay:500;" 
-          position="-35 -1 -45"
-          animation__2="property: position; to: -35.5 -2 -45; loop: true; dur: 3000; dir: alternate;"
-          ></a-entity>
+      <a-entity v-if="place!=='cave'" id="spot-lake2" light="type: spot; angle: 70; color:#288abf; intensity:10; target:#lake; decay:500;" 
+      position="-35 -1 -45"
+      animation__2="property: position; to: -35.5 -2 -45; loop: true; dur: 3000; dir: alternate;"
+      ></a-entity>
 
-          <a-entity  v-if="place!=='cave'" id="spot-lake3" light="type: spot; angle: 180; color:#288abf; intensity:2; decay:5000;" 
-          position="-35 -1 -45"
-          animation="property: position; to: -35.5 -1 -45; loop: true; dur: 3000; dir: alternate;"
-          ></a-entity>
-   
+      <a-entity  v-if="place!=='cave'" id="spot-lake3" light="type: spot; angle: 180; color:#288abf; intensity:2; decay:5000;" 
+      position="-35 -1 -45"
+      animation="property: position; to: -35.5 -1 -45; loop: true; dur: 3000; dir: alternate;"
+      ></a-entity>
+
       
 
 
@@ -236,13 +257,15 @@ console.log(place.value);
 
 
       <a-box
+      id="hitbox-water"
       material="color: #542e23  ;side: double;"
-      position="-28 0 -35"
+      position="-35 0 -45"
+      scale="14 6 6"
       clickable
       @waterTriggered="$event=>waterTriggered()"
       @waterTriggeredFar ="$event=>waterTriggeredFar()"
-      emit-when-near="target: #head; distance : 8; event : waterTriggered; eventFar: waterTriggeredFar"
-      visible="true"
+      emit-when-near="target: #head; distance : 18; event : waterTriggered; eventFar: waterTriggeredFar"
+      visible="false"
       >
     </a-box>
 
@@ -397,7 +420,7 @@ console.log(place.value);
         :x="-27"
         :y="0.2"
       />
-      <TheNavMesh />
+      <!-- <TheNavMesh /> -->
     </template>
  
 
