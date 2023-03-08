@@ -28,7 +28,6 @@
   <a-entity
     id="camera-rig"
     movement-controls="camera: #head; speed:1;"
-    adisable-in-vr="component: movement-controls;"
     position="-27 0 0"
   >
 
