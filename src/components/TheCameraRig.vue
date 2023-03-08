@@ -24,15 +24,11 @@
 </script>
 
 
-/* @teleport-cave-back="$event=>position = '-27 0 0'"
-    @teleport-apartment="$event=>position = '0 -600 6'"
-    @teleport-apartment-back="$event=>position = '-27 0 0'" */
-
 <template>
   <a-entity
     id="camera-rig"
     movement-controls="camera: #head; speed:1;"
-    disable-in-vr="component: movement-controls;"
+    adisable-in-vr="component: movement-controls;"
     position="-27 0 0"
   >
 

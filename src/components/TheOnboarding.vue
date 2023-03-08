@@ -76,7 +76,7 @@ function enterScene() {
               >CC BY 4.0</a
             >
           </dt>
-          <dd>
+          <dt>
             "The Queen of the Caverns" (https://skfb.ly/otORv) by Aligned Games
             is licensed under Creative Commons Attribution
             <a
@@ -85,8 +85,8 @@ function enterScene() {
               >CC BY 4.0</a
             >
             
-          </dd>
-          <dd>
+          </dt>
+          <dt>
             "Low Poly Nature" (https://skfb.ly/6CvOW) by EdwinRC is licensed
             under Creative Commons Attribution
             <a
@@ -94,15 +94,40 @@ function enterScene() {
               target="_blank"
               >CC BY 4.0</a
             >
-          </dd>
-          <dd>
+          </dt>
+          <dt>
             "SM_Teleporter" (https://skfb.ly/osBBE) by Kain Hunter is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
             <a
               href="https://creativecommons.org/licenses/by/4.0/"
               target="_blank"
               >CC BY 4.0</a
             >
-          </dd>
+          </dt>
+          <dt>
+            "diamond" (https://skfb.ly/6ROTt) by MadIsleGames is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+            <a
+              href="https://creativecommons.org/licenses/by/4.0/"
+              target="_blank"
+              >CC BY 4.0</a
+            >
+          </dt>
+          <dt>
+            "Treasure Chest" (https://skfb.ly/6ny6s) by Amanda Alavi is licensed under CC Attribution-NonCommercial-NoDerivs (http://creativecommons.org/licenses/by-nc-nd/4.0/).
+            <a
+              href="https://creativecommons.org/licenses/by/4.0/"
+              target="_blank"
+              >CC BY 4.0</a
+            >
+          </dt>
+          <dt>
+            "R/GA_Arrows_1" (https://skfb.ly/6ConE) by andrew.carmichael is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+            <a
+              href="https://creativecommons.org/licenses/by/4.0/"
+              target="_blank"
+              >CC BY 4.0</a
+            >
+          </dt>
+          
         </dl>
       </div>
     </div>

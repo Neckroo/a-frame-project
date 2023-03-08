@@ -43,6 +43,12 @@ function clickOnDropZone ($event){
     target1.removeAttribute("grabbable");
     target1.setAttribute("position", "4 -598.9 0.5");
   }
+
+
+  if (goldGrabbed.value&&diamondGrabbed.value) {
+
+
+  }
 }
 
 function chestClicked($event) {
@@ -420,7 +426,7 @@ console.log(place.value);
         :x="-27"
         :y="0.2"
       />
-      <!-- <TheNavMesh /> -->
+      <TheNavMesh />
     </template>
  
 
