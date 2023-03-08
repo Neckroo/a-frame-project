@@ -73,7 +73,18 @@ function diamondClicked($event) {
 function waterTriggered($event) {
   console.log("water triggered");
   document.querySelector("#spot-lake").setAttribute("light", "intensity:0");
+  document.querySelector("#spot-lake2").setAttribute("light", "intensity:0");
+  document.querySelector("#spot-lake3").setAttribute("light", "intensity:0");
 }
+
+function waterTriggeredFar($event){
+  console.log("water triggered again");
+  document.querySelector("#spot-lake").setAttribute("light", "intensity:10");
+  document.querySelector("#spot-lake2").setAttribute("light", "intensity:10");
+  document.querySelector("#spot-lake3").setAttribute("light", "intensity:2");
+}
+
+
 
 function tpToMyPlace(newPlace) {
   place.value = newPlace;
@@ -113,13 +124,12 @@ console.log(place.value);
       <!--   <a-asset-item  id="navmesh-apartment" src="assets/navmesh-apartment.glb"></a-asset-item>
       <a-asset-item  id="navmesh-cave" src="assets/navmesh-cave.glb"></a-asset-item> -->
       <a-asset-item id="gold-bar" src="assets/gold_bar_low_poly.glb"></a-asset-item>
-      <a-assets-item><img id="sky" src="assets/sky3.png"></a-assets-item>
+      <a-assets-item><img id="sky" src="/assets/sky3.png"></a-assets-item>
       <a-asset-item id="teleporter" src="assets/sm_teleporter.glb"></a-asset-item>
       <a-asset-item id="arrow-3d" src="assets/arrow.glb"></a-asset-item>
       <a-asset-item id="nav-mesh-room" src="assets/navmesh.glb"></a-asset-item>
       <a-asset-item id="nav-mesh-cave" src="assets/navmesh-cave.glb"></a-asset-item>
       <a-asset-item id="nav-mesh-apartment" src="assets/navmesh-apartment.glb"></a-asset-item>
-      <a-asset-item id="water" src="assets/water_waves.glb"></a-asset-item>
 
 
       <a-asset-item id="sound-forest" response-type="arraybuffer" src="assets/forest.mp3" preload="auto"></a-asset-item>
@@ -175,17 +185,17 @@ console.log(place.value);
       animation="property: position; to: -7 -9997.7 1; loop: true; dur: 1000; dir: alternate;"
       ></a-entity>
 
-      <a-entity id="spot-lake" light="type: spot; angle: 70; color:#288abf; intensity:10; target:#lake; decay:500;" 
+      <a-entity v-if="place!=='cave'" id="spot-lake" light="type: spot; angle: 70; color:#288abf; intensity:10; target:#lake; decay:500;" 
           position="-35 -1 -45"
           animation="property: position; to: -35 0 -45.45; loop: true; dur: 3000; dir: alternate;"
           ></a-entity>
 
-          <a-entity id="spot-lake2" light="type: spot; angle: 70; color:#288abf; intensity:10; target:#lake; decay:500;" 
+          <a-entity v-if="place!=='cave'" id="spot-lake2" light="type: spot; angle: 70; color:#288abf; intensity:10; target:#lake; decay:500;" 
           position="-35 -1 -45"
           animation__2="property: position; to: -35.5 -2 -45; loop: true; dur: 3000; dir: alternate;"
           ></a-entity>
 
-          <a-entity id="spot-lake3" light="type: spot; angle: 180; color:#288abf; intensity:2; decay:5000;" 
+          <a-entity  v-if="place!=='cave'" id="spot-lake3" light="type: spot; angle: 180; color:#288abf; intensity:2; decay:5000;" 
           position="-35 -1 -45"
           animation="property: position; to: -35.5 -1 -45; loop: true; dur: 3000; dir: alternate;"
           ></a-entity>
@@ -193,8 +203,8 @@ console.log(place.value);
       
 
 
-      <a-entity light="type: point; intensity: 7; distance: 4; decay: 5" position="-29.2 0.4 9"></a-entity>
-      <a-entity light="type: point; intensity: 7; distance: 4; decay: 5" position="-72 0.6 -25"></a-entity>
+      <a-entity light="type: point; intensity: 7; distance: 4; decay: 5" position="-29.7 0.4 8"></a-entity>
+      <a-entity light="type: point; intensity: 7; distance: 4; decay: 5" position="-69 0.6 -25"></a-entity>
 
 
       <a-entity id="lantern1" light="type: point; intensity: 4; distance: 1; decay: 4; color: #ffbc05;" position="25.5 -9999.3 -6"
@@ -225,14 +235,16 @@ console.log(place.value);
        </a-box>
 
 
-       <a-box
-    material="color: #542e23  ;side: double;"
-    clickable
-    @waterTriggered="$event=>waterTriggered()"
-    emit-when-near="target: #head; distance : 10; event : waterTriggered;"
-    visible="false"
-    >
-  </a-box>
+      <a-box
+      material="color: #542e23  ;side: double;"
+      position="-28 0 -35"
+      clickable
+      @waterTriggered="$event=>waterTriggered()"
+      @waterTriggeredFar ="$event=>waterTriggeredFar()"
+      emit-when-near="target: #head; distance : 8; event : waterTriggered; eventFar: waterTriggeredFar"
+      visible="true"
+      >
+    </a-box>
 
       <a-entity
         position="-27 1.5 -3"
@@ -265,7 +277,7 @@ console.log(place.value);
       <a-entity
         id="teleporter-appart"
         gltf-model="#teleporter"
-        position="-29.2 0.4 9"
+        position="-29.7 0.3 8"
         scale="0.1 0.1 0.1"
       ></a-entity>
 
@@ -289,7 +301,7 @@ console.log(place.value);
       <a-entity
         id="teleporter-cave"
         gltf-model="#teleporter"
-        position="-72 0.6 -25"
+        position="-69 0.6 -25"
         scale="0.1 0.1 0.1"
         clickable
         @tpToPlace="tpToMyPlace('cave')"
@@ -354,7 +366,7 @@ console.log(place.value);
 
       <PortalTeleporter
         label="Enter the Cave"
-        position="-72 1 -25"
+        position="-69 1 -25"
         rotation="70 -0 0 "
         :x="28"
         :y="-10000"
@@ -373,7 +385,7 @@ console.log(place.value);
 
       <PortalTeleporter
         label="Enter the apartment"
-        position="-29.2 2 9"
+        position="-29.7 1 8"
         rotation="0 0 0 "
         :y="-600"
         :z="6"
