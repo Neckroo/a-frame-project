@@ -28,15 +28,16 @@
   <a-entity
     id="camera-rig"
     movement-controls="camera: #head; speed:1;"
+    adisable-in-vr="component: movement-controls;"
     position="-27 0 0"
   >
 
       <a-entity
         id="head"
         look-controls="pointerLockEnabled: true"
-        simple-navmesh-constraint="navmesh: [data-role='nav-mesh']; height: 1.65; fall: 0.8;"
+        simple-navmesh-constraint="navmesh: [data-role='nav-mesh']; height: 1.85; fall: 0.8;"
         camera
-        position="0 1.65 0"
+        position="0 1.85 0"
         pathfinding="startEvents: move; speed: 0.8;"
         nav-mesh="type: triangle; id: navMesh;"
           
@@ -56,15 +57,15 @@
       <a-entity
         id="hand-left"
         hand-controls="hand: left"
-       
-      ></a-entity>
-      <!-- blink-controls="  
+        ablink-controls="  
           landingMaxAngle: 90;
           cameraRig: #camera-rig;
           teleportOrigin: #head;
           collisionEntities: [data-role='nav-mesh'];
           snapTurn: false;
-          defaultPlaneSize: 1000;" -->
+          defaultPlaneSize: 1000;"
+      ></a-entity>
+
       <a-entity
         id="hand-right"
         hand-controls="hand: right"
