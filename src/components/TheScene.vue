@@ -330,7 +330,7 @@ console.log(place.value);
       <a-entity
         id="teleporter-cave"
         gltf-model="#teleporter"
-        position="-69 0.6 -25"
+        position="-69 0.3 -25"
         scale="0.1 0.1 0.1"
         clickable
         @tpToPlace="tpToMyPlace('cave')"
